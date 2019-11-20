@@ -46,26 +46,26 @@ bool multySetContains(int value)
 	return result;
 }
 
-void multySetAdd(int value)
-{
-	if (!multySetIsFull())
-	{
-		if (!multySetContains(value))
-		{
-			multySet[multySetLength].taskNumber = value;
-			++multySet[multySetLength].count;
-			++multySetLength;
-			++multySetCount;
-		}
-		else
-		{
-			++multySet[multySetIndexOf(value)].count;
-			++multySetCount;
-		}
-	}
-}
+//void multySetAdd(int value)
+//{
+//	if (!multySetIsFull())
+//	{
+//		if (!multySetContains(value))
+//		{
+//			multySet[multySetLength].taskNumber = value;
+//			++multySet[multySetLength].count;
+//			++multySetLength;
+//			++multySetCount;
+//		}
+//		else
+//		{
+//			++multySet[multySetIndexOf(value)].count;
+//			++multySetCount;
+//		}
+//	}
+//}
 
-void multySetAdd(int value, int n)
+void multySetAdd(int value, int n = 1)
 {
 	if (!multySetIsFull())
 	{
