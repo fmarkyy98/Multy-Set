@@ -84,22 +84,23 @@ void multySetAdd(int value, int n = 1)
 	}
 }
 
-void multySetRemove(int value)
+void multySetRemove(int value, int n = 1)
 {
 	if (multySetContains(value))
 	{
-		if (multySet[multySetIndexOf(value)].count == 1)
+		if (multySet[multySetIndexOf(value)].count <= n)
 		{
 			int idx = multySetIndexOf(value);
 			multySet[idx].taskNumber = -1;
-			--multySet[idx].count;
+			multySetCount -= multySet[idx].count;
+			multySet[idx].count = 0;
 			--multySetLength;
-			--multySetCount;
+
 		}
 		else
 		{
-			--multySet[multySetIndexOf(value)].count;
-			--multySetCount;
+			multySet[multySetIndexOf(value)].count -= n;
+			multySetCount -= n;
 		}
 	}
 }
