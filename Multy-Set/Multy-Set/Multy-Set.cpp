@@ -1,20 +1,98 @@
-// Multy-Set.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+
+using namespace std;
+
+struct Node
+{
+	int taskNumber = -1;
+	int count = 0;
+};
+
+const int MAX_N = 30;
+Node multySet[MAX_N];
+int multySetLength = 0;
+int multySetCount = 0;
+
+bool multySetIsFull()
+{
+	bool result = multySetLength == MAX_N;
+}
+
+bool multySetIsEmpty()
+{
+	bool result = multySetLength == 0;
+}
+
+int multySetIndexOf(int value)
+{
+	int result = -1;
+	int i = 0;
+	while (i < multySetCount && result == -1)
+	{
+		if (multySet[i].taskNumber == value)
+		{
+			result = i;
+		}
+		++i;
+	}
+	return result;
+}
+
+bool multySetContains(int value)
+{
+	bool result = multySetIndexOf(value) != -1;
+	return result;
+}
+
+void multySetAdd(int value)
+{
+	if (!multySetIsFull())
+	{
+		if (!multySetContains(value))
+		{
+			multySet[multySetLength].taskNumber = value;
+			++multySet[multySetLength].count;
+			++multySetLength;
+			++multySetCount;
+		}
+		else
+		{
+			++multySet[multySetIndexOf(value)].count;
+			++multySetCount;
+		}
+	}
+}
+
+void multySetRemove(int value)
+{
+	if (multySetContains(value))
+	{
+		if (multySet[multySetIndexOf(value)].count == 1)
+		{
+			int idx = multySetIndexOf(value);
+			multySet[idx].taskNumber = -1;
+			--multySet[idx].count;
+			--multySetLength;
+			--multySetCount;
+		}
+		else
+		{
+			--multySet[multySetIndexOf(value)].count;
+			--multySetCount;
+		}
+	}
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; ++i)
+	{
+		int temporal;
+		cin >> temporal;
+		multySetAdd(temporal);
+	}
+
+	cout << "Hello World!\n";
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
