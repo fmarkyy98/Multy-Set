@@ -16,18 +16,20 @@ int multySetCount = 0;
 bool multySetIsFull()
 {
 	bool result = multySetLength == MAX_N;
+	return result;
 }
 
 bool multySetIsEmpty()
 {
 	bool result = multySetLength == 0;
+	return result;
 }
 
 int multySetIndexOf(int value)
 {
 	int result = -1;
 	int i = 0;
-	while (i < multySetCount && result == -1)
+	while (i < multySetLength && result == -1)
 	{
 		if (multySet[i].taskNumber == value)
 		{
@@ -59,6 +61,25 @@ void multySetAdd(int value)
 		{
 			++multySet[multySetIndexOf(value)].count;
 			++multySetCount;
+		}
+	}
+}
+
+void multySetAdd(int value, int n)
+{
+	if (!multySetIsFull())
+	{
+		if (!multySetContains(value))
+		{
+			multySet[multySetLength].taskNumber = value;
+			multySet[multySetLength].count += n;
+			++multySetLength;
+			multySetCount += n;
+		}
+		else
+		{
+			multySet[multySetIndexOf(value)].count += n;
+			multySetCount += n;
 		}
 	}
 }
